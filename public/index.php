@@ -19,7 +19,7 @@ try{
         http_response_code(404);
         echo json_encode([
             'error' => true,
-            'message' => 'Route not found'
+            'message' => 'Not found'
         ]);
         exit;
     }

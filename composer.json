@@ -1,0 +1,22 @@
+{
+    "name": "joaquim/ranking-api",
+    "autoload": {
+        "psr-4": {
+            "app\\": "app/",
+            "routers\\": "routers/"
+        },
+        "files": [
+            "config/database.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "JoaquimLP",
+            "email": "joaquimlp2013@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.2"
+    }
+}

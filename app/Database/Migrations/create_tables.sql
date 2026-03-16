@@ -24,5 +24,11 @@ CREATE TABLE IF NOT EXISTS personal_record (
         FOREIGN KEY (movement_id) REFERENCES movement(id)
 );
 
+CREATE INDEX idx_personal_record_movement
+ON personal_record(movement_id);
+
+CREATE INDEX idx_personal_record_user
+ON personal_record(user_id);
+
 CREATE INDEX idx_movement_value
 ON personal_record (movement_id, value);

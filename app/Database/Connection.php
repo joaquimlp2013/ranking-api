@@ -6,7 +6,11 @@ abstract class Connection
 {
     protected static $instance;
 
-    // Método para obter a instância da conexão PDO
+    /**
+     * Retorna uma instância única de conexão PDO com base nas variáveis de ambiente.
+     *
+     * @return \PDO
+     */
     public static function getInstance()
     {
         // Carrega variáveis do .env manualmente, se necessário

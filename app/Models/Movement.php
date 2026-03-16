@@ -10,6 +10,11 @@ class Movement extends Model
         'name',
     ];
 
+    /**
+     * Retorna explicitamente o nome da tabela de movimentos.
+     *
+     * @return string
+     */
     public function getTableName()
     {
         return $this->table;

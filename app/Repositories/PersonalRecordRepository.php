@@ -8,11 +8,20 @@ class PersonalRecordRepository
 {
     protected $connection;
 
+    /**
+     * Inicializa a conexão PDO usada nas consultas de recordes.
+     */
     public function __construct()
     {
         $this->connection = Connection::getInstance();
     }
 
+    /**
+     * Busca os recordes de um movimento ordenados do maior para o menor valor.
+     *
+     * @param int $movementId
+     * @return array
+     */
     public function getRecordsByMovementId(int $movementId)
     {
         $sql = "

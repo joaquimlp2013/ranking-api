@@ -4,6 +4,9 @@ namespace app\Database\Seeders;
 
 class MovementSeeder
 {
+    /**
+     * Insere os movimentos padrão caso ainda não existam na base.
+     */
     public function run()
     {
         $movements = [

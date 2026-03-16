@@ -4,6 +4,9 @@ namespace app\Database\Seeders;
 
 class UserSeeder
 {
+    /**
+     * Insere os usuários padrão caso ainda não existam na base.
+     */
     public function run()
     {
         $users = [

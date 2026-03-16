@@ -4,6 +4,9 @@ namespace app\Database\Seeders;
 
 class PersonalRecordSeeder
 {
+    /**
+     * Popula a tabela de recordes pessoais com os dados iniciais do desafio.
+     */
     public function run()
     {
         $personalRecords = [

@@ -10,6 +10,11 @@ class User extends Model
         'name',
     ];
 
+    /**
+     * Retorna explicitamente o nome da tabela de usuários.
+     *
+     * @return string
+     */
     public function getTableName()
     {
         return $this->table;

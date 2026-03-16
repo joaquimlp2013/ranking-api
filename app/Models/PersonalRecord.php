@@ -13,6 +13,11 @@ class PersonalRecord extends Model
         'date',
     ];
 
+    /**
+     * Retorna explicitamente o nome da tabela de recordes pessoais.
+     *
+     * @return string
+     */
     public function getTableName()
     {
         return $this->table;

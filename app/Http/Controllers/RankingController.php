@@ -4,6 +4,11 @@ namespace app\Http\Controllers;
 
 class RankingController
 {
+    /**
+     * Busca os parâmetros da requisição e retorna o ranking do movimento informado.
+     *
+     * @return array
+     */
     public function getRanking()
     {
         try {

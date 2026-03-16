@@ -14,17 +14,30 @@ abstract class Model extends Connection
     protected array $fillable = [];
     protected $conn;
 
+    /**
+     * Inicializa a conexão compartilhada utilizada pelas operações do model.
+     */
     public function __construct()
     {
         $this->conn = parent::getInstance();
     }
 
+    /**
+     * Resolve o nome padrão da tabela a partir do nome curto da classe.
+     *
+     * @return string
+     */
     public function getTableName()
     {
         return strtolower((new \ReflectionClass($this))->getShortName());
     }
 
-    // Responsável por criar um novo registro no banco de dados
+    /**
+     * Cria um novo registro utilizando apenas os campos liberados no model.
+     *
+     * @param array $data
+     * @return string
+     */
     public function create(array $data)
     {
         // Filtra apenas os campos permitidos
@@ -49,6 +62,12 @@ abstract class Model extends Connection
         return $this->conn->lastInsertId();
     }
 
+    /**
+     * Busca o primeiro registro que corresponda exatamente ao nome informado.
+     *
+     * @param string $name
+     * @return array|false
+     */
     public function findByName(string $name)
     {
         $sql = "SELECT * FROM {$this->getTableName()} WHERE name = ? LIMIT 1";
@@ -62,7 +81,12 @@ abstract class Model extends Connection
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
-    // Responsável por buscar um registro pelo ID
+    /**
+     * Busca um registro pelo identificador primário.
+     *
+     * @param mixed $id
+     * @return array|false
+     */
     public function find($id)
     {
         $sql = "SELECT * FROM {$this->getTableName()} WHERE id = ? LIMIT 1";
@@ -77,7 +101,13 @@ abstract class Model extends Connection
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
-    // Responsável por verificar se um registro existe com base em um campo específico
+    /**
+     * Verifica se existe ao menos um registro com o valor informado em um campo.
+     *
+     * @param string $field
+     * @param mixed $value
+     * @return bool
+     */
     public function has(string $field, $value): bool
     {
         $sql = "SELECT 1 FROM {$this->getTableName()} WHERE {$field} = ? LIMIT 1";
@@ -91,7 +121,11 @@ abstract class Model extends Connection
         return (bool) $stmt->fetchColumn();
     }
 
-    // Responsável por buscar todos os registros de uma tabela
+    /**
+     * Retorna todos os registros da tabela associada ao model.
+     *
+     * @return array
+     */
     public function get()
     {
         $sql = "SELECT * FROM {$this->getTableName()}";
@@ -103,7 +137,13 @@ abstract class Model extends Connection
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    // Responsável por atualizar um registro existente
+    /**
+     * Atualiza um registro pelo ID com os campos permitidos enviados.
+     *
+     * @param mixed $id
+     * @param array $data
+     * @return int
+     */
     public function update($id, array $data)
     {
         // Filtra apenas os campos permitidos
@@ -126,7 +166,12 @@ abstract class Model extends Connection
         return $stmt->rowCount();
     }
 
-    // Responsável por deletar um registro pelo ID
+    /**
+     * Remove um registro pelo identificador informado.
+     *
+     * @param mixed $id
+     * @return int
+     */
     public function delete($id)
     {
         $sql = "DELETE FROM {$this->getTableName()} WHERE id = ?";

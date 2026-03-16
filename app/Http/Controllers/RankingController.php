@@ -12,16 +12,13 @@ class RankingController
 
             $rankingService = new \app\Services\RankingService();
             $ranking = $rankingService->getRanking($movementId, $movementName);
-            var_dump($ranking);
-            return [];
-        } catch (\Exception $e) {
-
-            echo json_encode([
-                'error' => true,
-                'message' => $e->getMessage()
-            ]);
             return [
-                'error' => true,
+                "status" => true,
+                "data" => $ranking
+            ];
+        } catch (\Exception $e) {
+            return [
+                'status' => false,
                 'message' => 'Failed to retrieve ranking'
             ];
         }

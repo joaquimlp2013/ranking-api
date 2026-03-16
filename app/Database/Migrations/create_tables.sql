@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS personal_record (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     movement_id INT NOT NULL,
-    value INT NOT NULL,
+    value FLOAT NOT NULL,
     date DATETIME NOT NULL,
 
     CONSTRAINT fk_user

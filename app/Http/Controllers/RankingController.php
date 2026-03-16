@@ -16,6 +16,7 @@ class RankingController
             $movementName = isset($_GET['movement']) ? trim($_GET['movement']) : null;
 
             if ($movementId === null && empty($movementName)) {
+                http_response_code(400);
                 return [
                     'status' => false,
                     'message' => 'It is required to provide movement_id or movement.'
@@ -29,9 +30,12 @@ class RankingController
                 "data" => $ranking
             ];
         } catch (\Exception $e) {
+            http_response_code($e->getMessage() === 'Movement not found' ? 404 : 500);
             return [
                 'status' => false,
-                'message' => 'Failed to retrieve ranking'
+                'message' => $e->getMessage() === 'Movement not found'
+                    ? 'Movement not found.'
+                    : 'Failed to retrieve ranking.'
             ];
         }
     }

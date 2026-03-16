@@ -10,9 +10,9 @@ class UserSeeder
     public function run()
     {
         $users = [
-            ['name' => 'João'],
-            ['name' => 'José'],
-            ['name' => 'Pualo'],
+            ['name' => 'Joao'],
+            ['name' => 'Jose'],
+            ['name' => 'Paulo'],
         ];
 
         foreach ($users as $userData) {

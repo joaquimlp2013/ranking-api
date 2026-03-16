@@ -1,11 +1,11 @@
 USE ranking_api;
 
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE IF NOT EXISTS user (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS movements (
+CREATE TABLE IF NOT EXISTS movement (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL UNIQUE
 );
@@ -18,18 +18,11 @@ CREATE TABLE IF NOT EXISTS personal_record (
     date DATETIME NOT NULL,
 
     CONSTRAINT fk_user
-        FOREIGN KEY (user_id) REFERENCES users(id),
+        FOREIGN KEY (user_id) REFERENCES user(id),
 
     CONSTRAINT fk_movement
-        FOREIGN KEY (movement_id) REFERENCES movements(id)
+        FOREIGN KEY (movement_id) REFERENCES movement(id)
 );
-
-ALTER TABLE `personal_record` ADD CONSTRAINT
-`personal_record_fk0` FOREIGN KEY (`user_id`) REFERENCES
-`user`(`id`);
-ALTER TABLE `personal_record` ADD CONSTRAINT
-`personal_record_fk1` FOREIGN KEY (`movement_id`) REFERENCES
-`movement`(`id`);
 
 CREATE INDEX idx_movement_value
 ON personal_record (movement_id, value);

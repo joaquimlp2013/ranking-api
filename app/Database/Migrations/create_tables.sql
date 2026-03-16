@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS movements (
     name VARCHAR(255) NOT NULL UNIQUE
 );
 
-CREATE TABLE IF NOT EXISTS movement_records (
+CREATE TABLE IF NOT EXISTS personal_record (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     movement_id INT NOT NULL,
@@ -32,4 +32,4 @@ ALTER TABLE `personal_record` ADD CONSTRAINT
 `movement`(`id`);
 
 CREATE INDEX idx_movement_value
-ON movement_records (movement_id, value);
+ON personal_record (movement_id, value);

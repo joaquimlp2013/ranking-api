@@ -13,7 +13,14 @@ class RankingController
     {
         try {
             $movementId = isset($_GET['movement_id']) ? (int) $_GET['movement_id'] : null;
-            $movementName = $_GET['movement'] ?? null;
+            $movementName = isset($_GET['movement']) ? trim($_GET['movement']) : null;
+
+            if ($movementId === null && empty($movementName)) {
+                return [
+                    'status' => false,
+                    'message' => 'It is required to provide movement_id or movement.'
+                ];
+            }
 
             $rankingService = new \app\Services\RankingService();
             $ranking = $rankingService->getRanking($movementId, $movementName);

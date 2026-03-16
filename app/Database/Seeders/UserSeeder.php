@@ -12,7 +12,13 @@ class UserSeeder
             ['name' => 'Pualo'],
         ];
 
-        // Aqui você pode adicionar a lógica para inserir os usuários no banco de dados
-        // Por exemplo, usando PDO ou MySQLi para executar as queries de inserção
+        $user = new \app\Models\User();
+
+        foreach ($users as $userData) {
+            $hasUser = $user->has('name', $userData['name']);
+            if (!$hasUser) {
+                $user->create($userData);
+            }
+        }
     }
 }

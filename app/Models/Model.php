@@ -25,6 +25,7 @@ abstract class Model extends Connection
         return strtolower((new \ReflectionClass($this))->getShortName());
     }
 
+    // Responsável por criar um novo registro no banco de dados
     public function create(array $data)
     {
         // Filtra apenas os campos permitidos
@@ -49,6 +50,7 @@ abstract class Model extends Connection
         return $this->conn->lastInsertId();
     }
 
+    // Responsável por buscar um registro pelo ID
     public function find($id)
     {
         $sql = "SELECT * FROM {$this->getTableName()} WHERE id = ? LIMIT 1";
@@ -63,6 +65,21 @@ abstract class Model extends Connection
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
+    // Responsável por verificar se um registro existe com base em um campo específico
+    public function has(string $field, $value): bool
+    {
+        $sql = "SELECT 1 FROM {$this->getTableName()} WHERE {$field} = ? LIMIT 1";
+        $stmt = $this->conn->prepare($sql);
+        if (!$stmt) {
+            throw new \Exception('Erro ao preparar statement: ' . $this->conn->errorInfo()[2]);
+        }
+        if (!$stmt->execute([$value])) {
+            throw new \Exception('Erro ao executar query: ' . $stmt->errorInfo()[2]);
+        }
+        return (bool) $stmt->fetchColumn();
+    }
+
+    // Responsável por buscar todos os registros de uma tabela
     public function get()
     {
         $sql = "SELECT * FROM {$this->getTableName()}";
@@ -74,6 +91,7 @@ abstract class Model extends Connection
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    // Responsável por atualizar um registro existente
     public function update($id, array $data)
     {
         // Filtra apenas os campos permitidos
@@ -96,6 +114,7 @@ abstract class Model extends Connection
         return $stmt->rowCount();
     }
 
+    // Responsável por deletar um registro pelo ID
     public function delete($id)
     {
         $sql = "DELETE FROM {$this->getTableName()} WHERE id = ?";

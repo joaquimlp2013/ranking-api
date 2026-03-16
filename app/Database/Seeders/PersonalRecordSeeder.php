@@ -128,8 +128,12 @@ class PersonalRecordSeeder
             ],
         ];
 
-        
-        // Aqui você pode adicionar a lógica para inserir os recordes pessoais no banco de dados
-        // Por exemplo, usando PDO ou MySQLi para executar as queries de inserção
+        foreach ($personalRecords as $record) {
+            $personalRecordModel = new \app\Models\PersonalRecord();
+            $hasRecord = $personalRecordModel->has('id', $record['id']);
+            if (!$hasRecord) {
+                $personalRecordModel->create($record);
+            }
+        }
     }
 }

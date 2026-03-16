@@ -2,9 +2,9 @@
 
 namespace app\Models;
 
-class MovementRecord extends Model
+class PersonalRecord extends Model
 {
-    protected string $table = 'movement_record';
+    protected string $table = 'personal_record';
 
     protected array $fillable = [
         'user_id',

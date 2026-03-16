@@ -12,7 +12,12 @@ class MovementSeeder
             ['name' => 'Bench Press'],
         ];
 
-        // Aqui você pode adicionar a lógica para inserir os movimentos no banco de dados
-        // Por exemplo, usando PDO ou MySQLi para executar as queries de inserção
+        foreach ($movement as $movementData) {
+            $movementModel = new \app\Models\Movement();
+            $hasMovement = $movementModel->has('name', $movementData['name']);
+            if (!$hasMovement) {
+                $movementModel->create($movementData);
+            }
+        }
     }
 }

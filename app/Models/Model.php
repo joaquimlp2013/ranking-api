@@ -6,7 +6,6 @@ use app\Database\Connection;
 
 abstract class Model extends Connection
 {
-    
     /**
      * Campos permitidos para inserção/atualização
      * Defina nas models filhas.
@@ -48,6 +47,19 @@ abstract class Model extends Connection
         }
 
         return $this->conn->lastInsertId();
+    }
+
+    public function findByName(string $name)
+    {
+        $sql = "SELECT * FROM {$this->getTableName()} WHERE name = ? LIMIT 1";
+        $stmt = $this->conn->prepare($sql);
+        if (!$stmt) {
+            throw new \Exception('Erro ao preparar statement: ' . $this->conn->errorInfo()[2]);
+        }
+        if (!$stmt->execute([$name])) {
+            throw new \Exception('Erro ao executar query: ' . $stmt->errorInfo()[2]);
+        }
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
     // Responsável por buscar um registro pelo ID

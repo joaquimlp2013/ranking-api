@@ -6,7 +6,7 @@ class PersonalRecordSeeder
 {
     public function run()
     {
-                $personalRecords = [
+        $personalRecords = [
             [
                 'id' => 1,
                 'user_id' => 1,

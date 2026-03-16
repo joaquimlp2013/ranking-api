@@ -7,23 +7,23 @@ class RankingController
     public function getRanking()
     {
         try {
-            // Simula dados de ranking
-            $ranking = [
-                ['name' => 'Alice', 'score' => 100],
-                ['name' => 'Bob', 'score' => 90],
-                ['name' => 'Charlie', 'score' => 80],
-            ];
+            $movementId = isset($_GET['movement_id']) ? (int) $_GET['movement_id'] : null;
+            $movementName = $_GET['movement'] ?? null;
 
-            return [
-                'error' => false,
-                'data' => $ranking
-            ];
+            $rankingService = new \app\Services\RankingService();
+            $ranking = $rankingService->getRanking($movementId, $movementName);
+            var_dump($ranking);
+            return [];
         } catch (\Exception $e) {
+
+            echo json_encode([
+                'error' => true,
+                'message' => $e->getMessage()
+            ]);
             return [
                 'error' => true,
                 'message' => 'Failed to retrieve ranking'
             ];
         }
-        
     }
 }

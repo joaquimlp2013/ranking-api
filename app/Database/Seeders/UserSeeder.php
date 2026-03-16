@@ -12,9 +12,8 @@ class UserSeeder
             ['name' => 'Pualo'],
         ];
 
-        $user = new \app\Models\User();
-
         foreach ($users as $userData) {
+            $user = new \app\Models\User();
             $hasUser = $user->has('name', $userData['name']);
             if (!$hasUser) {
                 $user->create($userData);

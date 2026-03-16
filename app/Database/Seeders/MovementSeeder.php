@@ -6,13 +6,13 @@ class MovementSeeder
 {
     public function run()
     {
-        $movement = [
+        $movements = [
             ['name' => 'Deadlift'],
             ['name' => 'Back Squat'],
             ['name' => 'Bench Press'],
         ];
 
-        foreach ($movement as $movementData) {
+        foreach ($movements as $movementData) {
             $movementModel = new \app\Models\Movement();
             $hasMovement = $movementModel->has('name', $movementData['name']);
             if (!$hasMovement) {
